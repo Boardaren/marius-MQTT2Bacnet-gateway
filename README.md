@@ -1,20 +1,16 @@
-# 🏔️ Siemens BACnet MQTT Gateway
+🏔️ Siemens BACnet MQTT Gateway
+This is a professional, bidirectional gateway that connects MQTT sensors and actuators to a BACnet/IP network. The gateway is designed with a modern, Siemens-inspired web interface for easy configuration and maintenance.
 
-Dette er en profesjonell, toveis gateway som kobler MQTT-sensorer og aktuatorer til et BACnet/IP-nettverk. Gatewayen er designet med et moderne Siemens-inspirert webgrensesnitt for enkel konfigurasjon og vedlikehold.
+✨ Features
+Bidirectional Communication: Read data from MQTT to BACnet, and write setpoints from BACnet back to MQTT.
+Dynamic Mapping: Automatically discovers new MQTT topics and creates BACnet points in real-time.
+CSV Management: Download a mapping table, assign custom names to your variables, and set permissions (Read Only / Write).
+Siemens Web UI: A simple interface for changing Device ID, network interface (NIC), and MQTT settings.
+Docker-ready: Runs in a lightweight container.
+🚀 Quick Start for Colleagues
+1. Prerequisites
+You must have Docker and Docker Compose installed on your server.
 
-## ✨ Funksjoner
-- **Toveis kommunikasjon:** Les data fra MQTT til BACnet, og skriv settpunkter fra BACnet tilbake til MQTT.
-- **Dynamisk Mapping:** Oppdager nye MQTT-topics automatisk og lager BACnet-punkter i sanntid.
-- **CSV-styring:** Last ned en mapping-tabell, gi variablene dine egne navn, og sett rettigheter (Read Only / Write).
-- **Siemens Web UI:** Enkelt grensesnitt for å endre Device ID, nettverkskort og MQTT-innstillinger.
-- **Docker-klar:** Kjører i en lettvekts container.
-
-## 🚀 Hurtigstart for kollegaer
-
-### 1. Forutsetninger
-Du må ha **Docker** og **Docker Compose** installert på serveren din.
-
-### 2. Last ned prosjektet
-```bash
+2. Download the Project
 git clone https://github.com/Boardaren/marius-MQTT2Bacnet-gateway.git
 cd marius-MQTT2Bacnet-gateway
