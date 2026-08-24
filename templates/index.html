@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Siemens | BACnet MQTT Gateway</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        :root { --siemens-petrol: #0082c9; --siemens-accent: #00ffb9; --siemens-gray: #2d373c; --siemens-light: #f2f5f7; }
+        body { background-color: var(--siemens-light); color: var(--siemens-gray); font-family: 'Arial', sans-serif; }
+        .navbar { background-color: var(--siemens-petrol); color: white; padding: 1rem; border-bottom: 4px solid var(--siemens-accent); }
+        .navbar-brand { font-weight: bold; font-size: 1.5rem; color: white !important; }
+        .card { border: none; border-radius: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 2rem; }
+        .card-header { background-color: white; border-bottom: 2px solid var(--siemens-light); font-weight: bold; color: var(--siemens-petrol); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
+        .btn-primary { background-color: var(--siemens-petrol); border: none; border-radius: 0; padding: 10px 25px; font-weight: bold; }
+        .btn-danger { background-color: #eb3333; border: none; border-radius: 0; font-weight: bold; }
+        .btn-success { background-color: var(--siemens-accent); border: none; border-radius: 0; color: var(--siemens-gray); font-weight: bold; }
+        .form-control, .form-select { border-radius: 0; border: 1px solid #ced4da; }
+        .footer-line { height: 4px; background: linear-gradient(to right, var(--siemens-petrol), var(--siemens-accent)); margin-top: 50px; }
+        .section-title { color: var(--siemens-petrol); border-left: 5px solid var(--siemens-accent); padding-left: 15px; margin-bottom: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <nav class="navbar mb-5"><div class="container"><span class="navbar-brand">SIEMENS | <small style="font-weight: 300;">BACnet MQTT Gateway</small></span></div></nav>
+
+    <div class="container">
+        <div class="alert alert-info border-0 rounded-0 shadow-sm mb-4">
+            <strong>ℹ️ Info:</strong> Etter opplasting av ny CSV-fil eller endring av innstillinger, må du trykke på <strong>RESTART GATEWAY</strong> for at endringene skal tre i kraft.
+        </div>
+
+        <form action="/save_config" method="post">
+            <h3 class="section-title">BACnet Configuration</h3>
+            <div class="card"><div class="card-body row g-4">
+                <div class="col-md-4"><label>Device ID</label><input type="number" name="bacnet_id" class="form-control" value="{{ config.bacnet_id }}"></div>
+                <div class="col-md-4"><label>Network Interface</label><select name="bacnet_iface" class="form-select">{% for i in ifaces %}<option value="{{i}}" {% if i == config.bacnet_iface %}selected{% endif %}>{{i}}</option>{% endfor %}</select></div>
+                <div class="col-md-4"><label>Global Prefix</label><input type="text" name="prefix" class="form-control" value="{{ config.prefix }}"></div>
+            </div></div>
+
+            <h3 class="section-title">MQTT Broker Setup</h3>
+            <div class="card"><div class="card-body row g-4">
+                <div class="col-md-6"><label>Broker Address</label><input type="text" name="mqtt_broker" class="form-control" value="{{ config.mqtt_broker }}"></div>
+                <div class="col-md-6"><label>Port</label><input type="number" name="mqtt_port" class="form-control" value="{{ config.mqtt_port }}"></div>
+                <div class="col-md-6"><label>Username</label><input type="text" name="mqtt_user" class="form-control" value="{{ config.mqtt_user }}"></div>
+                <div class="col-md-6"><label>Password</label><input type="password" name="mqtt_pass" class="form-control" value="{{ config.mqtt_pass }}"></div>
+            </div></div>
+            
+            <div class="text-end mb-5"><button type="submit" class="btn btn-primary">SAVE ALL SETTINGS</button></div>
+        </form>
+
+        <h3 class="section-title">Mapping & Maintenance</h3>
+        <div class="card"><div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-md-4 border-end"><a href="/download_csv" class="btn btn-success w-100">DOWNLOAD MAPPING.CSV</a></div>
+                <div class="col-md-4 border-end"><form action="/upload_csv" method="post" enctype="multipart/form-data"><div class="input-group"><input type="file" name="file" class="form-control"><button type="submit" class="btn btn-primary">UPLOAD</button></div></form></div>
+                <div class="col-md-4"><form action="/restart_gateway" method="post"><button type="submit" class="btn btn-danger w-100">RESTART GATEWAY</button></form></div>
+            </div>
+        </div></div>
+    </div>
+    <div class="footer-line"></div>
+</body>
+</html>
