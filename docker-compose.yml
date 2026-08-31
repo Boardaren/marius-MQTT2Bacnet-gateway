@@ -1,8 +1,7 @@
-version: '3.8'
 services:
-  gateway:
+  gateway-v2:
     build: .
-    container_name: marius-gateway
+    container_name: marius-gateway-v2
     network_mode: host
     restart: always
     volumes:
